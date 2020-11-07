@@ -1,13 +1,11 @@
 # Primitive and General Recursive Functions in C++
 
-# Motivation
-
 This library is intended for educational purposes.
 
 It provides facilities to play around with primitive and general recursive functions.
 It is designed for the syntax to be as simple and natural as possible.
 
-It also provides stronger type checking; if it compiles it should be somewhat valid - but not necessarily what you intended to express.
+It also provides stronger type checking; if it compiles it should be somewhat valid.
 
 # Usage
 
@@ -24,9 +22,9 @@ It might get a little difficult if you're not familiar with C++, so don't hesita
 
 # Compatibility
 
-It requires a compiler supporting some C++20 features.
+It requires a compiler supporting some early C++20 features.
 
-// TODO
+Developped under MSVC 19.27.
 
 # Examples
 
