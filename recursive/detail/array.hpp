@@ -8,7 +8,7 @@ namespace rec {
 namespace detail {
 
 template<typename Ty, std::size_t N> constexpr
-std::array<Ty, N + 1> pushed_front(
+std::array<Ty, N + 1> pushed_front_as_array(
     std::span<const Ty, N> s, const Ty& e)
 {
     auto a = std::array<Ty, N + 1>{e};
