@@ -1,4 +1,4 @@
-# Primitive and General Recursive Functions in C++
+# Primitive Recursive Functions in C++
 
 This library provides facilities to play around with primitive and general recursive functions.
 It is designed for educational purposes such that the syntax is as simple and natural as possible.
