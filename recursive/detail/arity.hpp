@@ -42,6 +42,14 @@ template<typename R, std::size_t Arity>
 struct arity<R(*)(span<Arity>)>
 : std::integral_constant<std::size_t, Arity> {};
 
+template<typename R, std::size_t Arity>
+struct arity<R(*const)(span<Arity>)>
+: std::integral_constant<std::size_t, Arity> {};
+
+template<typename R, std::size_t Arity>
+struct arity<R(*const&)(span<Arity>)>
+: std::integral_constant<std::size_t, Arity> {};
+
 // Specializations for lambda functions
 
 template<typename R, typename C, std::size_t Arity>
