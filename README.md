@@ -13,6 +13,11 @@ It also enables important features:
 
 This is an header-only library. You need only to include the required headers into your own source files.
 
+Everything is nicely packed into the `rec` namespace.
+```cpp
+using namespace rec; // To avoid having to prefix it.
+```
+
 Include `recursive/primitive.hpp` for *primitive recursive functions*:
 - N-ary constant function: `O<N> : N`
 - Successor function: `S : 1`
@@ -78,6 +83,8 @@ For example:
     auto P = Rec(O<0>, Pi<1, 2>); // Unused recurrence term.
     eval(P, n); // P will be evaluated for each value in [0, n].
     // n - 1 computations for basically nothin' :(
+
+    // This will also produce suboptimal performances for 'If' function and others.
 ```
 
 I did not find a way to implement lazy evaluation which wouldn't break the syntax or compile-time evaluation.
