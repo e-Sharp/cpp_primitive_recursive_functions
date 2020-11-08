@@ -35,7 +35,8 @@ arr<1> Pi(span<Arity> s) {
 // Composition
 template<typename F, typename... Gs> constexpr
 auto Comp(const F& f, Gs&&... gs) {
-    static_assert(detail::arity_v<F> == sizeof...(Gs));
+    static_assert(detail::arity_v<F> == sizeof...(Gs),
+        "Comp<F, ...Gs>: Arity of f must be equal to the number of gs.");
     // Capture by copy to avoid dangling references.
     // I had to write 'f = f' otherwise constexpr would fail on MSVC (?).
     return [f = f, gs = std::make_tuple(std::forward<Gs>(gs)...)]
