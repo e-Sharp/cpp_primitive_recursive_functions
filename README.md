@@ -39,7 +39,7 @@ std::cout << eval(Plus, 17, 13); // Prints 30.
 
 See more examples in below.
 
-## Adaptating this for your own needs
+## Adaptating this to your own needs
 
 You can, according to the MIT licence, do almost whatever you want with this library.
 For example you might want to adapt it to your own conventions - naming, parameter order - or to provide additional facilities.
@@ -91,7 +91,7 @@ I did not find a way to implement lazy evaluation which wouldn't break the synta
 
 **Giving up the syntax:** Functions would return lambdas instead of values.
 But lambda types are implementation defined and vary from one lambda to another.
-Therefore any crafted function would need to become variadic. This is the most reasonable way in my opinion but syntax is to important to be discarded for educational purposes and I didn't have the courage to look into macros.
+Therefore any crafted function would need to become variadic. This is the most reasonable way in my opinion but syntax is too important for educational purposes to be discarded and I didn't have the courage to look into macros.
 
 **Giving up compile-time evaluation:** Functions would return `std::function<nat()>` instead of values. This is the most straightforward way.
 
