@@ -7,6 +7,18 @@
 namespace rec {
 namespace detail {
 
+// Push
+
+template<typename Ty, std::size_t N> constexpr
+std::array<Ty, N + 1> pushed_back_as_array(
+    std::span<const Ty, N> s, const Ty& e)
+{
+    auto a = std::array<Ty, N + 1>{};
+    std::copy(std::begin(s), std::end(s), std::begin(a));
+    a.back() = e;
+    return a;
+}
+
 template<typename Ty, std::size_t N> constexpr
 std::array<Ty, N + 1> pushed_front_as_array(
     std::span<const Ty, N> s, const Ty& e)
