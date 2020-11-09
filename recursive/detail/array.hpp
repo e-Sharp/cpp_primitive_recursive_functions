@@ -15,7 +15,7 @@ template<
     typename... Args,
     std::enable_if_t<(Ith < sizeof...(Args)), int> = 0> constexpr
 std::array<Ty, sizeof...(Args)> static_casted_as_array(
-    const std::tuple<Args&&...>& t)
+    const std::tuple<Args...>& t)
 {
     auto a = static_casted_as_array<Ty, Ith + 1>(t);
     a[Ith] = static_cast<Ty>(std::get<Ith>(t));
@@ -28,7 +28,7 @@ template<
     typename... Args,
     std::enable_if_t<(Ith == sizeof...(Args)), int> = 0> constexpr
 std::array<Ty, sizeof...(Args)> static_casted_as_array(
-    const std::tuple<Args&&...>&)
+    const std::tuple<Args...>&)
 {
     return {};
 }
