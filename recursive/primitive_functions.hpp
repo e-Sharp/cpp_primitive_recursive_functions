@@ -60,7 +60,7 @@ auto unchecked_Rec(const B& b, const H& h) {
     return [b = b, h = h](span<detail::arity_v<B> + 1> input) -> arr<1> {
         auto h_input = detail::pushed_back_as_array(
             input, b(detail::popped_front(input))[0]);
-        for(h_input[0] = 0; h_input[0] < input[0]; ++h_input[0]) {
+        for(h_input[0] = 1; h_input[0] <= input[0]; ++h_input[0]) {
             h_input.back() = h(h_input)[0];
         }
         return {h_input.back()};
