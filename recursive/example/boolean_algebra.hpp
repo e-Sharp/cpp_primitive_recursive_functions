@@ -29,4 +29,8 @@ constexpr auto Not = Rec(T<0>, F<2>);
 
 constexpr auto Xor = Rec(Pi<1, 1>, Comp(Not, Pi<2, 3>));
 
+constexpr auto Impli = Rec(T<1>, Pi<2, 3>);
+
+constexpr auto Equiv = Rec(Comp(Not, Pi<1, 1>), Pi<2, 3>);
+
 } // namespace rec
