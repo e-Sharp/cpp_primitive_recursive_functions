@@ -23,7 +23,7 @@ arr<sizeof...(Fs)> parallel_evaluation_as_array(
 }
 
 template<
-    std::size_t Ith = 0,
+    std::size_t Ith,
     typename... Fs,
     std::size_t Arity,
     std::enable_if_t<(Ith == sizeof...(Fs)), int> = 0> constexpr
