@@ -56,7 +56,7 @@ It might get a little difficult if you're not familiar with C++ so don't hesitat
 
 It requires a compiler supporting some early C++20 features.
 
-Developped under `MSVC 19.27`.
+It was developped under `MSVC 19.27`.
 As of now some work may be required to make it work under a different compiler - please do not hesitate to submit an issue or a PR.
 
 # Future
@@ -76,16 +76,7 @@ Is *C++14* compatibility straightforward enough ?
 
 ### Lazy primitive recursion
 
-The *recursion term* is recursively computed whether the right hand side function uses it or not. This will induces a big overhead in some cases.
-
-For example:
-```cpp
-    auto P = Rec(O<0>, Pi<1, 2>); // Unused recurrence term.
-    eval(P, n); // P will be evaluated for each value in [0, n].
-    // n - 1 computations for basically nothin' :(
-
-    // This will also produce suboptimal performances for 'If' function and others.
-```
+Every single term is evaluated whether it used or not. This will induces an overhead for all functions but `O<0>`, `S` and `Min`.
 
 I did not find a way to implement lazy evaluation which wouldn't break the syntax or compile-time evaluation.
 
