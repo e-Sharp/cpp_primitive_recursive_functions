@@ -3,9 +3,35 @@
 #include <algorithm> // std::copy
 #include <array> // std::array, std::begin, std::end
 #include <span> // std::span, std::begin, std::end
+#include <tuple> // std::tuple
+#include <type_traits> // std::enable_if_t
 
 namespace rec {
 namespace detail {
+
+template<
+    typename Ty,
+    std::size_t Ith = 0,
+    typename... Args,
+    std::enable_if_t<(Ith < sizeof...(Args)), int> = 0> constexpr
+std::array<Ty, sizeof...(Args)> static_casted_as_array(
+    const std::tuple<Args&&...>& t)
+{
+    auto a = static_casted_as_array<Ty, Ith + 1>(t);
+    a[Ith] = static_cast<Ty>(std::get<Ith>(t));
+    return a;
+}
+
+template<
+    typename Ty,
+    std::size_t Ith,
+    typename... Args,
+    std::enable_if_t<(Ith == sizeof...(Args)), int> = 0> constexpr
+std::array<Ty, sizeof...(Args)> static_casted_as_array(
+    const std::tuple<Args&&...>&)
+{
+    return {};
+}
 
 // Push
 
