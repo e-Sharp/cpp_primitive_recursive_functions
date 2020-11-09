@@ -33,8 +33,8 @@ Include `recursive/general.hpp` for *general recursive functions*:
 
 An `eval` function is provided in order to simplify evaluation of *recursive functions* like so:
 ```cpp
-auto Plus = Rec(Pi<1, 1>, Comp(S, Pi<3, 3>));
-std::cout << eval(Plus, 17, 13); // Prints 30.
+auto Sum = Rec(Pi<1, 1>, Comp(S, Pi<3, 3>));
+std::cout << eval(Sum, 17, 13); // Prints 30.
 ```
 
 See more examples in below.
@@ -50,7 +50,28 @@ It might get a little difficult if you're not familiar with C++ so don't hesitat
 
 # Examples
 
-// TODO
+```cpp
+auto And = Rec(F<1>, Pi<2, 3>);
+auto Or = Rec(I, T<3>);
+auto Not = Rec(T<0>, F<2>);
+
+auto P = Rec(O<0>, Pi<1, 2>);
+
+auto Sum = Rec(Pi<1, 1>, Comp(S, Pi<3, 3>));
+auto TDiff = Comp(Rec(Pi<1, 1>, Comp(P, Pi<3, 3>)), Pi<2, 2>, Pi<1, 2>);
+auto AbsDiff = Comp(Sum, TDiff, Comp(TDiff, Pi<2, 2>, Pi<1, 2>));
+
+auto Prod = Rec(O<1>, Comp(Sum, Pi<2, 3>, Pi<3, 3>));
+auto Fact = Rec(One<0>, Comp(Prod, Comp(S, Pi<1, 2>), Pi<2, 2>));
+
+auto Eq = Comp(Not, AbsDiff);
+
+auto Mod = Rec(O<1>, Comp(If, Comp(Eq, Comp(S, Pi<3, 3>), Pi<2, 3>), O<3>, Comp(S, Pi<3, 3>)));
+auto Div = Comp(Not, Mod);
+auto Prim = Comp(Eq, Comp(S, Comp(Rec(O<1>, Comp(Sum, Comp(Div, Pi<2, 3>, Pi<1, 3>), Pi<3, 3>)), I, I)), Two<1>);
+```
+
+You can find more examples in `recursive/examples.hpp`.
 
 # Compatibility
 
@@ -68,12 +89,6 @@ I will still look at issues and PRs so don't hesitate to submit one.
 
 ## Possible improvements
 
-### Older standards compatibility
-
-*C++17* compatibility should be easily achievable.
-
-Is *C++14* compatibility straightforward enough ?
-
 ### Lazy primitive recursion
 
 Every single term is evaluated whether it used or not. This will induces an overhead for all functions but `O<0>`, `S` and `Min`.
@@ -82,9 +97,19 @@ I did not find a way to implement lazy evaluation which wouldn't break the synta
 
 **Giving up the syntax:** Functions would return lambdas instead of values.
 But lambda types are implementation defined and vary from one lambda to another.
-Therefore any crafted function would need to become variadic. This is the most reasonable way in my opinion but syntax is too important for educational purposes to be discarded and I didn't have the courage to look into macros.
+Therefore any crafted function would need to become variadic. Alas syntax is too important for educational purposes to be discarded and I didn't have the courage to look into macros.
 
-**Giving up compile-time evaluation:** Functions would return `std::function<nat()>` instead of values. This is the most straightforward way.
+**Giving up compile-time evaluation:** Functions would return `std::function<nat()>` instead of values. This is the most straightforward way and probably the most reasonnable one as compile-time is more of a whim of mine.
+
+### Older standards compatibility
+
+*C++17* compatibility should be easily achievable.
+
+Is *C++14* compatibility straightforward enough ?
+
+### Single header library
+
+This more of a CI task. Having a single header generated would facilitate integration.
 
 # Origin
 
